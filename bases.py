@@ -22,7 +22,10 @@ def decode(digits, base):
     counter = len(digits)-1
     sum=0
     while counter>=0:
-        sum+=int(digits[counter])*(base**exponent)
+        if digits[counter].isdigit():
+            sum+=int(digits[counter])*(base**exponent)
+        else:
+            sum+=int(digits[counter],base=16)*(base**exponent)
 
         counter-=1
         exponent+=1
@@ -30,6 +33,7 @@ def decode(digits, base):
 
     # ...
     # TODO: Decode digits from hexadecimal (base 16)
+
     # ...
     # TODO: Decode digits from any base (2 up to 36)
     # ...
@@ -88,4 +92,5 @@ def main():
 
 
 if __name__ == '__main__':
-    print(decode('101101',2))
+    print(decode('101ace101',16))
+    print(decode('101',2))
