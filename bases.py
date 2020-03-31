@@ -63,11 +63,17 @@ def encode(number, base):
         quotiont = dividend//divisor
 
         while dividend is not 1:
-            num_array.insert(0,int(dividend%divisor))
-            dividend = quotiont
-            quotiont = dividend//divisor
+            if int(str(dividend%divisor),base=base)>9:
+                num_array.insert(0,int(str(dividend%divisor),base=base))
+                print(num_array)
+                dividend = quotiont
+                quotiont = dividend//divisor
+            else:
+                num_array.insert(0,int(dividend%divisor))
+                dividend = quotiont
+                quotiont = dividend//divisor
         num_array.insert(0,dividend)
-        print(num_array)
+
         return ''.join(map(str,num_array))
 
 
@@ -112,3 +118,4 @@ if __name__ == '__main__':
     print(decode('101',2))
     print(decode('876zfcs101',36))
     print(encode(5,2))
+    print(encode(52,3))
