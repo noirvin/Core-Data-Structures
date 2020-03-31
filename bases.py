@@ -18,18 +18,6 @@ def decode(digits, base):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # TODO: Decode digits from binary (base 2)
-    exponent = 0
-    counter = len(digits)-1
-    sum=0
-    while counter>=0:
-        if digits[counter].isdigit():
-            sum+=int(digits[counter])*(base**exponent)
-        else:
-            sum+=int(digits[counter],base=16)*(base**exponent)
-
-        counter-=1
-        exponent+=1
-    return sum
 
     # ...
     # TODO: Decode digits from hexadecimal (base 16)
@@ -37,6 +25,18 @@ def decode(digits, base):
     # ...
     # TODO: Decode digits from any base (2 up to 36)
     # ...
+    exponent = 0
+    counter = len(digits)-1
+    sum=0
+    while counter>=0:
+        if digits[counter].isdigit():
+            sum+=int(digits[counter])*(base**exponent)
+        else:
+            sum+=int(digits[counter],base=base)*(base**exponent)
+
+        counter-=1
+        exponent+=1
+    return sum
 
 
 def encode(number, base):
@@ -94,3 +94,4 @@ def main():
 if __name__ == '__main__':
     print(decode('101ace101',16))
     print(decode('101',2))
+    print(decode('876zfcs101',36))
