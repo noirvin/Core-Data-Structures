@@ -54,6 +54,22 @@ def encode(number, base):
     # ...
     # TODO: Encode number in any base (2 up to 36)
     # ...
+    if number is 0:
+        return '0'
+    else:
+        divisor = base
+        dividend = number
+        num_array = []
+        quotiont = dividend//divisor
+
+        while dividend is not 1:
+            num_array.insert(0,int(dividend%divisor))
+            dividend = quotiont
+            quotiont = dividend//divisor
+        num_array.insert(0,dividend)
+        print(num_array)
+        return ''.join(map(str,num_array))
+
 
 
 def convert(digits, base1, base2):
@@ -95,3 +111,4 @@ if __name__ == '__main__':
     print(decode('101ace101',16))
     print(decode('101',2))
     print(decode('876zfcs101',36))
+    print(encode(5,2))
