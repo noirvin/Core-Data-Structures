@@ -54,28 +54,18 @@ def encode(number, base):
     # ...
     # TODO: Encode number in any base (2 up to 36)
     # ...
-    if number is 0:
-        return '0'
-    else:
-        divisor = base
-        dividend = number
-        num_array = []
-        quotiont = dividend//divisor
+    encodedValue = ""
 
-        while dividend is not 1:
-            if int(str(dividend%divisor),base=base)>9:
-                num_array.insert(0,int(str(dividend%divisor),base=base))
-                print(num_array)
-                dividend = quotiont
-                quotiont = dividend//divisor
-            else:
-                num_array.insert(0,int(dividend%divisor))
-                dividend = quotiont
-                quotiont = dividend//divisor
-        num_array.insert(0,dividend)
+    while number > 0:
+        number, remainder = divmod(number, base)
+        if remainder >= 10:
+            encodedValue += chr(remainder + 87)
+        else:
+            encodedValue += str(remainder)
 
-        return ''.join(map(str,num_array))
+    encodedValue = encodedValue[::-1]
 
+    return encodedValue
 
 
 def convert(digits, base1, base2):
@@ -96,7 +86,7 @@ def convert(digits, base1, base2):
     # TODO: Convert digits from any base to any base (2 up to 36)
     # ...
 
-
+    return encode(decode(digits, base1), base2)
 def main():
     """Read command-line arguments and convert given digits between bases."""
     import sys
@@ -119,3 +109,5 @@ if __name__ == '__main__':
     print(decode('876zfcs101',36))
     print(encode(5,2))
     print(encode(52,3))
+    print(encode(19,36))
+    print(convert("300",2,36))
