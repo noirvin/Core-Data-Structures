@@ -111,3 +111,4 @@ if __name__ == '__main__':
     print(encode(52,3))
     print(encode(19,36))
     print(convert("300",2,36))
+    main()
