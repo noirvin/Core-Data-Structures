@@ -80,5 +80,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    text = 'no, on!'
-    print(is_palindrome_recursive(text))
+    
