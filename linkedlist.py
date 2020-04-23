@@ -111,7 +111,7 @@ class LinkedList(object):
             node = self.head
             for _ in range(index - 1):
                 node = node.next
-            new_node = Node(item)    
+            new_node = Node(item)
             new_node.next == node
             node = new_node
             self.size += 1
@@ -176,7 +176,7 @@ class LinkedList(object):
         Worst case running time: ??? under what conditions? [TODO]"""
         # TODO: Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
-        if self.find(old_item) == None:
+        if old_item not in self.items():
             raise ValueError("item not found")
         else:
             node = self.head
