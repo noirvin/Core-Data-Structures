@@ -94,16 +94,24 @@ class ArrayStack(object):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty."""
         # TODO: Return top item, if any
-        return self.list[self.length()-1]
+        if self.is_empty():
+            return None
+        else:
+            return self.list[self.length()-1]
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
         Running time: O(???) – Why? [TODO]"""
         # TODO: Remove and return top item, if any
-        self.list.pop()
+        if self.is_empty():
+            raise ValueError("not found")
+        else:
+            last_item = self.list[self.length()-1]
+            self.list.pop()
+            return last_item
 
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
 # to use each of your Stack implementations to verify they each pass all tests
-Stack = LinkedStack
+Stack = ArrayStack
 # Stack = ArrayStack
