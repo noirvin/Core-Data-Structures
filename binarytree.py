@@ -242,32 +242,64 @@ class BinarySearchTree(object):
         # TODO: Use helper methods and break this algorithm down into 3 cases
         # based on how many children the node containing the given item has and
         # implement new helper methods for subtasks of the more complex cases
-        # node = self._find_node_recursive(item,self.root)
-        # if node is None:
-        #     raise ValueError
-        # else:
-        #     if node.is_leaf():
-        #         if node.data == self.root.data:
-        #             self.root = None
-        #         else:
-        #             parent = self._find_parent_node_recursive(item,node)
-        #             if parent.left == node:
-        #                 parent.left == None
-        #             else:
-        #                 parent.right == None
-        #
-        #     elif node.left is not None and node.right is not None:
-        #
-        #         parent = self._find_parent_node_recursive(item,node)
-        #         if parent.left == node:
-        #
-        #
-        #         else:
-        #             parent.right == None
+        node = self._find_node_recursive(item,self.root)
+        if node is None:
+            raise ValueError
+        else:
+            parent = self._find_parent_node_recursive(item,node)
+            if node.left is not None and node.right is not None:
 
 
+                if parent.left == node:
+                    left_subtree=[]
+                    self._traverse_in_order_recursive(node,left_subtree.append)
+                    parent.left= self._find_node_recursive(min(left_subtree))
+                    parent_new_node = self._find_parent_node_recursive(parent.left)
+                    if parent_new_node is not None:
+                        if parent_new_node.left == parent.left:
+                            parent_new_node.left = None
+                        else:
+                            parent_new_node.right = None
 
-        pass
+                if parent.right == node:
+                    right_subtree=[]
+                    self._traverse_in_order_recursive(node,right_subtree.append)
+                    parent.right= self._find_node_recursive(max(left_subtree))
+                    parent_new_node = self._find_parent_node_recursive(parent.right)
+                    if parent_new_node is not None:
+                        if parent_new_node.right == parent.right:
+                            parent_new_node.right = None
+                        else:
+                            parent_new_node.left = None
+                parent.left.left = node.left
+                parent.right.right = node.right
+
+            else:
+                if node.left is not None:
+                    left_subtree=[]
+                    self._traverse_in_order_recursive(node,left_subtree.append)
+                    parent.left= self._find_node_recursive(min(left_subtree))
+                    parent_new_node = self._find_parent_node_recursive(parent.left)
+                    if parent_new_node is not None:
+                        if parent_new_node.left == parent.left:
+                            parent_new_node.left = None
+                        else:
+                            parent_new_node.right = None
+                else:
+                    right_subtree=[]
+                    self._traverse_in_order_recursive(node,right_subtree.append)
+                    parent.right= self._find_node_recursive(max(left_subtree))
+                    parent_new_node = self._find_parent_node_recursive(parent.right)
+                    if parent_new_node is not None:
+                        if parent_new_node.right == parent.right:
+                            parent_new_node.right = None
+                        else:
+                            parent_new_node.left = None
+
+                parent.left.left = node.left
+                parent.right.right = node.right
+
+            self.size-=1
 
 
     def items_in_order(self):
